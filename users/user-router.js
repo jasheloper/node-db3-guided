@@ -1,11 +1,12 @@
 const express = require("express");
 
-const db = require("../data/db-config.js");
+const db = require('../data/db-config.js')
+const users = require("./user-model.js");
 
 const router = express.Router();
 
 router.get("/", (req, res) => {
-  db("users")
+  users.find() // helper function from USER model 
     .then(users => {
       res.json(users);
     })
