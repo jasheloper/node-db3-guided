@@ -25,10 +25,17 @@ function update(changes, id) {
     .update(changes);
 }
 
+function destroy(id) {
+  return db("users")
+    .where({ id })
+    .del();
+}
+
 module.exports = {
   find,
   findById,
   findPosts,
   add,
-  update
+  update,
+  destroy
 };
