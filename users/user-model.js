@@ -10,13 +10,25 @@ function findById(id) {
 
 function findPosts(id) {
   return db("posts as p")
-  .join("users as u", "u.id", "p.user_id")
-  .select("p.id", "u.username", "p.contents")
-  .where({ user_id: id })
+    .join("users as u", "u.id", "p.user_id")
+    .select("p.id", "u.username", "p.contents")
+    .where({ user_id: id });
+}
+
+function add(userData) {
+  return db("users").insert(userData);
+}
+
+function update(changes, id) {
+  return db("users")
+    .where({ id })
+    .update(changes);
 }
 
 module.exports = {
   find,
   findById,
-  findPosts
+  findPosts,
+  add,
+  update
 };

@@ -39,8 +39,8 @@ router.get("/:id", (req, res) => {
 router.post("/", (req, res) => {
   const userData = req.body;
 
-  db("users")
-    .insert(userData)
+  users
+    .add(userData)
     .then(ids => {
       res.status(201).json({ created: ids[0] });
     })
@@ -53,9 +53,7 @@ router.put("/:id", (req, res) => {
   const { id } = req.params;
   const changes = req.body;
 
-  db("users")
-    .where({ id })
-    .update(changes)
+  users.update(changes, id)
     .then(count => {
       if (count) {
         res.json({ update: count });
